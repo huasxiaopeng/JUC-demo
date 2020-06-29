@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class Lock03 {
 
-    private static ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock(false);
+    private static ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock(true);
     //公平的读写方式
 //    private static ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock(true);
     //写锁
@@ -25,9 +25,9 @@ public class Lock03 {
      */
     public static void main(String[] args) {
 //                demo01();
-//                demo02();
+                demo02();
 //                  upLockDemo();
-                  downLockDemo();//从上面的例子中发现，升级不可以，降级可以
+                 // downLockDemo();//从上面的例子中发现，升级不可以，降级可以
     }
     /**
      * 既然 synchronized 锁升级策略，读写锁有升级策略么？
@@ -38,6 +38,9 @@ public class Lock03 {
      *  非公平的读写方式
      *  读写混写
      *  在生成子线程去抢
+     *
+     *
+     * 饥饿问题
      */
     private  static  void demo02(){
         new Thread(()->read(),"t1").start();
@@ -45,14 +48,27 @@ public class Lock03 {
         new Thread(()->read(),"t3").start();
         new Thread(()->read(),"t4").start();
         new Thread(()->write(),"t5").start();
+        new Thread(()->write(),"t6").start();
+        new Thread(()->write(),"t7").start();
         //创建子线程去抢
         new Thread(()->
         {
             Thread thread[] = new Thread[1000];
             for (int i = 0; i <1000 ; i++) {
-                thread[i]=new Thread(()->read(),"子线程："+i);
+                thread[i]=new Thread(()->read(),"子线程————》read："+i);
             }
             for (int i = 0; i <1000 ; i++) {
+                thread[i].start();
+            }
+        }).start();
+        //子线程去写
+        new Thread(()->
+        {
+            Thread thread[] = new Thread[100];
+            for (int i = 0; i <100 ; i++) {
+                thread[i]=new Thread(()->write(),"子线程-->write："+i);
+            }
+            for (int i = 0; i <100 ; i++) {
                 thread[i].start();
             }
         }).start();
@@ -62,10 +78,10 @@ public class Lock03 {
      */
     private  static void  demo01(){
         //创建四个线程调用
-        new Thread(()->read(),"t1").start();
-        new Thread(()->read(),"t2").start();
-        new Thread(()->write(),"t3").start();
-        new Thread(()->write(),"t4").start();
+//        new Thread(()->read(),"t1").start();
+//        new Thread(()->read(),"t2").start();
+//        new Thread(()->write(),"t3").start();
+//        new Thread(()->write(),"t4").start();
     }
     public  static void read(){
 
@@ -82,7 +98,7 @@ public class Lock03 {
         }
     }
     public  static void write(){
-            System.out.println("线程"+Thread.currentThread().getName()+"准备写锁");
+            System.out.println("线程"+Thread.currentThread().getName()+"准备获取写锁");
            writeLock.lock();
         try {
             System.out.println("线程"+Thread.currentThread().getName()+"获取到了写锁");
