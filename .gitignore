@@ -7,3 +7,55 @@
 *.iml
 out
 gen
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+demo01/src/main/resources/
+demo01/src/test/
+demo01/target/
+demo02/src/main/resources/
+demo02/src/test/
+demo02/target/generated-sources/
+demo04/src/main/resources/
+demo04/src/test/
+demo04/target/generated-sources/
+demo05/src/main/resources/
+demo05/src/test/
+demo05/target/
+demo06/src/main/resources/
+demo06/src/test/
+demo06/target/generated-sources/
+demo07/src/main/java/com/mock/
+demo07/src/main/resources/
+demo07/src/test/
+demo07/target/
