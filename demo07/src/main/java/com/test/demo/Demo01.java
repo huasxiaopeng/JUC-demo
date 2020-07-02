@@ -17,13 +17,15 @@ import static org.junit.Assert.assertEquals;
  * @Date 2020/7/2
  */
 public class Demo01 {
+
     /**
      *JUnit provides overloaded assertion methods for all primitive types and Objects and arrays
      * (of primitives or Objects).
      *  The parameter order is expected value followed by actual value.
      */
     @Test
-    public void demo01(){
+    public synchronized void demo01(){
+
         byte[] expected = "trial".getBytes();
         byte[] actual = "trial".getBytes();
         //判断数组是否相等
