@@ -5,7 +5,6 @@ import java.util.concurrent.locks.Lock;
 /**
  * @ClassName Lock01
  * @Description lock 接口使用学习指南
- *
  * @Author lktbz
  * @Date 2020/6/11
  */
@@ -14,7 +13,7 @@ public class Lock01 {
         /**
          * 因为是接口，所以具体实现，查看lock02
          */
-        Lock lock=null;
+        Lock lock = null;
         /**
          * 加锁
          *  void lock();
